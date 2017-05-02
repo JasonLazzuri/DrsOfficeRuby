@@ -3,7 +3,7 @@ require('pg')
 require('doctor')
 require('pry')
 
-DB = PG.connect({:dbname => "drs_test"})
+DB = PG.connect({:dbname => "office"})
 
 RSpec.configure do |config|
   config.after(:each) do
