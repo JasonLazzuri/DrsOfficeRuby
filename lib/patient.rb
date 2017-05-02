@@ -11,7 +11,7 @@ class Patient
     patients = []
     returned_patient.each() do |patient|
       name = patient.fetch("name")
-      birthday = patient.fetch("birthday").to_i()
+      birthday = patient.fetch("birthday")
       id = patient.fetch("id").to_i()
       patients.push(Patient.new({:name => name, :birthday => birthday, :id => id}))
     end
@@ -25,3 +25,5 @@ class Patient
 
   define_method(:==) do |another_patient|
     self.name().==(another_patient.name()).&(self.id().==(another_patient.id()))
+  end
+end

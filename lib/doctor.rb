@@ -26,4 +26,25 @@ class Doctor
   define_method(:==) do |another_dr|
     self.name().==(another_dr.name()).&(self.id().==(another_dr.id()))
   end
+
+  define_singleton_method(:find) do |id|
+    found_doctor = nil
+    Doctor.all().each() do |doctor|
+      if doctor.id().==(id)
+        found_doctor = doctor
+      end
+    end
+    found_doctor
+end
+
+  define_method(:patients) do
+    dr_patients = []
+    patients = DB.exec("SELECT * FROM patients WHERE doctor_id = #{self.id()};")
+    patients.each() do |patient|
+      name = patient.fetch("name")
+      doctor_id = patient.petch("doctor_id").to_i()
+      dr_patients.push(Patient.new({:name => name, :doctor_id => doctor_id}))
+    end
+    dr_patients
+  end
 end
